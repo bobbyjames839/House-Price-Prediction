@@ -1,0 +1,97 @@
+column names are the following - Id,MSSubClass,MSZoning,LotFrontage,LotArea,Street,Alley,LotShape,LandContour,Utilities,LotConfig,LandSlope,Neighborhood,Condition1,Condition2,BldgType,HouseStyle,OverallQual,OverallCond,YearBuilt,YearRemodAdd,RoofStyle,RoofMatl,Exterior1st,Exterior2nd,MasVnrType,MasVnrArea,ExterQual,ExterCond,Foundation,BsmtQual,BsmtCond,BsmtExposure,BsmtFinType1,BsmtFinSF1,BsmtFinType2,BsmtFinSF2,BsmtUnfSF,TotalBsmtSF,Heating,HeatingQC,CentralAir,Electrical,1stFlrSF,2ndFlrSF,LowQualFinSF,GrLivArea,BsmtFullBath,BsmtHalfBath,FullBath,HalfBath,BedroomAbvGr,KitchenAbvGr,KitchenQual,TotRmsAbvGrd,Functional,Fireplaces,FireplaceQu,GarageType,GarageYrBlt,GarageFinish,GarageCars,GarageArea,GarageQual,GarageCond,PavedDrive,WoodDeckSF,OpenPorchSF,EnclosedPorch,3SsnPorch,ScreenPorch,PoolArea,PoolQC,Fence,MiscFeature,MiscVal,MoSold,YrSold,SaleType,SaleCondition,SalePrice
+
+The length of the data is 1460.
+
+What are we going to use as features?
+
+Firstly lets look at the histograms for the labels 
+MSSubclass - very randomly distributed, 2 peaks at 20 and 60
+MSZoning - vast majority of the data is at RL
+LotFrontage - Sqewed normal distribution with most of the data being at around 70, however there are 2 outliers at 313. Datapoints 934 and 1298. 259 missing values
+LotArea - Normal distribution with most of the data being around 20000, some data above 100000.
+Street - 99% of the street is paved 
+Alley - 1/2 and 1/2 split between pave and gravel, 1369 missing values
+LotShape - Most is regular and then IR1, IR2, IR3 respectively
+LandContour - 90% of the data is lvl, 3 other types are all equally low in frequency.
+Utilities - all but 1 is allpub 
+LotConfig - predominantly inside but then there are 4 other variables with some data in
+LandSlope - 99% gtl
+Neighborhood - data is distributed across all randomly
+Condition1 - 90% norm but then some data in all other types
+Condition2 - 99% norm but then some data in all other types
+BldgType - most of the data is 1Fam but then there is some in other types
+HouseStyle - most the data is 1story and then some is 2story
+OverallQual - Sqewed normal distribution with most of the data with most being at 5-6
+OverallCond - peak at 5 but then there is some at 6 and 7 too 
+YearBuilt - Distribution with 3 separate peaks at 1920, 1970 and 2005
+YearRemodAdd - massive peak at 1950 and then a decrease to 1985 where there is a slow increase to 2005
+RoofStyle - 80% of the data is gable and then another 20 hip with trail amounts in other categories
+RoofMatl - 99% of the data is CompShg with then some of the data in other types
+Exterior1st - most is VinylSd but then there is some in the other types 
+Exterior2nd - most is VinylSd but then there is some in the other types 
+MasVnrType - 872 missing values and then 75% of the data is BrkFace
+MasVnrArea - 8 missing values and then there is a massive peak at 0 and then the rest of the data is between 0-500
+ExterQual - Most is TA but then there is some gd and then very little fa and ex 
+ExterCond - Most is TA and then some gd 
+Foundation - Most of the data is PConc and CBlock
+BsmtQual - 37 missing values and then most of the data is either gd of TA 
+BsmtCond - 37 missing values and then 90% is TA
+BsmtExposure - 38 missing values and then there is 80% no and then some other types 
+BsmtFinType1 - 37 missing values and then most of the data is GLQ or Unf 
+BsmtFinSF1 - peak at 0 and then there is a normal distribution around about 600
+BsmtFinType2 - 38 missing values with 90% of the data being unf 
+BsmtFinSF1 - peak at 0 and then is trail amounts scatter between 0 and 800
+BsmtUnfSF - peak at 0 and then theere is another peak at 250 before there is a slow decrease to 2000
+TotalBsmtSF - small peak at 0 but then a normal distribution around 1000
+Heating - 99% of the data is GasA 
+HeatingQC - most is ex but the some of the data is TA
+CentralAir - 90% of the data is Y 
+Eletrical - 1 missing value and then most of the data is SBrkr 
+1stFlrSF - there is a skewed normal distribution around 1000 with an outlier around 5000
+2ndFlrSF - large peak at 0 and then the data is scatter between 250-1500
+LowQualFinSF - 99% of the data is 0
+GrLivArea - outlier above 5000 but there is a sqewed normal distribution around 1500
+BsmtFullBath - 60% of the data is 0 and the other is 1 
+BsmtHalfBath - 90% is 0 and the other is 1
+FullBath - most of the data is either 1 or 2 with some having 3 
+HalfBath - 70% is 0 and the other 30 is 1 
+BedroomAbvGr - Normal distribution around 3
+KitchenAbvGr - 90% of the data is 1 and then 10 is 2 
+KitchenQual - most is either TA or gd
+TotRmsAbvGrd - Sqewed normal distribution around 6
+Functional - 99% of the data is typ 
+Fireplaces - most have either 0 or 1 but some have 2
+FireplaceQu - 690 missing values with most of the data either being gd or TA 
+GarageType -  81 missing values with most of data being attchd or detchd with some builtin
+GarageYrBlt - 81 missing values and there is peaks just before 1980 and just after 2000, slow increase over time 
+GarageFinish - 81 missing values with most being unf but some being rfn and fin 
+GarageCars - normally distributed around 2 
+GarageArea - peak at 0 but then a smaller peak at 250 and then a large peak at 500, after this there is a slow decrease
+GarageQual - Most is TA with some fa, 81 missing values 
+GarageCond - Most is TA with some fa, 81 missing values 
+PavedDrive - 90% yes and then 10% n or p 
+WoodDeckSF - peak at 0 and then a normal distribution around 150-200
+OpenPorchSF - peak at 0 and then there is a sqewed normaal distrbution with a peak at 50
+EnclosedPorch - peak at 0 and then about <10% data between 0-250
+3SsnPorch - 99% of the data is at 0 but there are some outliers near 200
+ScreenPorch - 99% of the data is at 0 but there are some outliers near 200
+PoolArea - all 0 but 7 datapoints 
+PoolQC - 1453 missing values and then most is gd but some fa and ex
+Fence - 1179 missing values and then most is MnPrv
+MiscFeature - 1406 missing values and then most is shed 
+MiscVal - 99% is 0 and then some is between 0-2000
+MoSold - normal distribution around 6
+YrSold - all equal from 2006 - 2010, but there is a small dip at 2010
+SaleType - 90% WD and then some new and cod
+SaleCondition - 90% normal and then some abnormal and partial
+SalePrice - scewed normal distribution around 150 with some outliers above 700000
+
+Features that can be removed from missing values 
+
+Alley, MasVnrType, FireplaceQu, PoolQC, Fence, MiscFeature
+
+However, lets have a look at this data before we remove it. All of the features do seem to have some affect on the house price but there just is not enough data in these columns and so filling the values with something would risk making the model less accurate
+
+Numerical Variables that are related -
+
+LotFrontage and LotArea
